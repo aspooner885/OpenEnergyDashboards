@@ -3,6 +3,7 @@ views:
     path: energie
     icon: mdi:solar-power
     type: sections
+    max_columns: 3
     sections:
       - type: grid
         cards:
@@ -30,27 +31,11 @@ views:
             primary: Netz → Haus
             secondary: '{{ states(''sensor.sigen_plant_daily_grid_import_energy'') }} kWh'
             icon: mdi:transmission-tower-import
-      - type: grid
-        cards:
-          - type: custom:power-flow-card-plus
-            title: Energiefluss
-            entities:
-              solar:
-                entity: sensor.sigen_plant_pv_power
-              battery:
-                entity: sensor.sigen_plant_battery_power
-                state_of_charge: sensor.sigen_plant_battery_state_of_charge
-                invert_state: true
-              home:
-                entity: sensor.sigen_plant_total_load_power
-              grid:
-                entity: sensor.sigen_plant_grid_active_power
-            clickable_entities: true
-            display_zero_lines: null
-            mode: show
-            watt_threshold: 0
-      - type: grid
-        cards:
+          - type: markdown
+            content: |
+              <div style="font-size:28px;font-weight:600;padding:0;margin:0;">
+              Tageswerte
+              </div>      
           - type: tile
             entity: sensor.sigen_plant_daily_pv_energy
             name: ☀️ Erzeugt
@@ -71,36 +56,33 @@ views:
             name: 📥 Netzbezug
       - type: grid
         cards:
+          - type: custom:power-flow-card-plus
+            title: Energiefluss
+            entities:
+              solar:
+                entity: sensor.sigen_plant_pv_power
+              battery:
+                entity: sensor.sigen_plant_battery_power
+                state_of_charge: sensor.sigen_plant_battery_state_of_charge
+                invert_state: true
+              home:
+                entity: sensor.sigen_plant_total_load_power
+              grid:
+                entity: sensor.sigen_plant_grid_active_power
+            clickable_entities: true
+            watt_threshold: 0
+            display_zero_lines: false
+      - type: grid
+        cards:
           - type: custom:apexcharts-card
             header:
               show: true
-              title: PV Leistung
+              title: PV-Leistung
             graph_span: 24h
             apex_config:
               chart:
-                height: 250
+                height: 380
             series:
               - entity: sensor.sigen_plant_pv_power
                 name: PV
                 type: area
-      - type: grid
-        cards:
-          - type: tile
-            entity: sensor.wp2_elektr_energie_heute
-            name: WP Heute
-          - type: tile
-            entity: sensor.wp2_elektr_energie_monat
-            name: WP Monat
-          - type: tile
-            entity: sensor.wp2_elektr_energie_jahr
-            name: WP Jahr
-          - type: tile
-            entity: sensor.wp2_jahresarbeitszahl
-            name: Jahres-AZ
-          - type: tile
-            entity: sensor.wp2_monatsarbeitszahl
-            name: Monats-AZ
-          - type: tile
-            entity: sensor.wp2_gesamt_energie_jahr
-            name: Wärme Jahr
-    cards: []
