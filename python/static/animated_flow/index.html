@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenEnergyDashboards</title>
+
+    <link rel="stylesheet" href="/static/animated_flow/style.css">
+</head>
+
+<body>
+
+    <div id="dashboard">
+
+
+
+        <div class="node" id="Photovoltaik_Karte">
+            <h2>☀️ PV</h2>
+            <span id="Photovoltaik">0,00 kW</span>
+        </div>
+
+        <div class="node" id="Netz_Karte">
+            <h2>🌍 Netz</h2>
+            <div id="Netzrichtung">Einspeisung</div>
+            <div id="Netzleistung">0,00 kW</div>
+        </div>
+
+        <div class="node" id="Haus_Karte">
+            <h2>🏠 Haus</h2>
+            <span id="Haus">0,00 kW</span>
+        </div>
+
+        <div class="node" id="Batterie_Karte">
+            <h2>🔋 Akku</h2>
+            <span id="Batteriestand">0 %</span>
+        </div>
+
+    </div>
+    <button id="themeToggle">🌙</button>
+    <script src="/static/animated_flow/app.js"></script>
+    <script src="/static/animated_flow/draw.js"></script>
+    <script src="/static/animated_flow/theme.js"></script>
+
+    
+
+        
+</body>
+
+</html>

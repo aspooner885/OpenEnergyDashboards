@@ -1,0 +1,5 @@
+icecream
+pyModbusTCP
+git+https://github.com/aspooner885/SigenergyPythonAPI.git@v1.0.0
+fastapi
+uvicorn

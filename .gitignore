@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtuelle Umgebungen
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
+
+# Lokale Konfiguration
+config.py
+
+# Python Cache
+.pytest_cache/
+.mypy_cache/

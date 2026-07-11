@@ -1,0 +1,123 @@
+body{
+    margin:0;
+    background:#181818;
+    color:white;
+    font-family:Arial;
+}
+
+
+
+.node{
+    z-index:10;
+    position:absolute;
+}
+
+
+#dashboard{
+    width:100vw;
+    height:100vh;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr 1fr;
+    grid-template-rows:1fr 1fr 1fr;
+
+    place-items:center;
+}
+
+.node{
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:#2d2d2d;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    box-shadow:0 0 20px #000;
+}
+
+
+
+#Photovoltaik_Karte{
+    left:50%;
+    top:8%;
+    transform:translateX(-50%);
+}
+
+#Netz_Karte{
+    left:10%;
+    top:40%;
+}
+
+#Haus_Karte{
+    right:10%;
+    top:40%;
+}
+
+#Batterie_Karte{
+    left:50%;
+    bottom:8%;
+    transform:translateX(-50%);
+}
+
+:root{
+    --bg:#1b1b1b;
+    --card:#2d2d2d;
+    --text:#ffffff;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    transition:.25s;
+}
+
+.node{
+    background:var(--card);
+    color:var(--text);
+    transition:.25s;
+}
+
+body.light{
+
+    --bg:#f2f2f2;
+    --card:#ffffff;
+    --text:#111111;
+
+}
+
+#themeToggle{
+
+    position:fixed;
+    top:20px;
+    right:20px;
+
+    width:46px;
+    height:46px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#444;
+    color:white;
+
+    font-size:22px;
+    cursor:pointer;
+
+    z-index:9999;
+}
+
+body.light #themeToggle{
+
+    background:#ffffff;
+    color:#111;
+    box-shadow:0 0 8px rgba(0,0,0,.2);
+
+}
