@@ -1,54 +1,53 @@
 # OpenEnergyDashboards
 
-OpenEnergyDashboards ist eine Sammlung verschiedener Dashboards und Visualisierungen für **SigEnergy-Anlagen**.
+OpenEnergyDashboards ist eine Sammlung moderner Dashboards und Visualisierungen für **SigEnergy-Energiespeichersysteme**.
 
-Ziel dieses Projekts ist es, Energieflüsse auf unterschiedlichen Plattformen modern, übersichtlich und in Echtzeit darzustellen.
+Das Projekt stellt verschiedene Möglichkeiten bereit, Energieflüsse, Erzeugung, Verbrauch und Batteriedaten übersichtlich und in Echtzeit darzustellen.
 
 ## Unterstützte Plattformen
 
-- 🐍 Python
-- 🏠 Home Assistant
-- 📊 Grafana
-- 🌐 HTML / Web
+- 🐍 Python Dashboard
+- 🏠 Home Assistant Dashboard
+- 📊 Grafana (geplant)
+- 🌐 Web / HTML (geplant)
 
 ---
 
 # Python Dashboard
 
-Ein einfaches Live-Dashboard für SigEnergy-Speichersysteme.
+Ein eigenständiges Web-Dashboard mit animierter Energieflussdarstellung.
 
 ## Funktionen
 
-Das Dashboard zeigt in Echtzeit:
-
 - ☀️ PV-Leistung
-- 🌍 Netzbezug / Einspeisung
 - 🏠 Hausverbrauch
-- 🔋 Batteriestand
-- animierten Energiefluss
-- Hell-/Dunkelmodus (Einstellung wird gespeichert)
+- 🌍 Netzbezug / Einspeisung
+- 🔋 Batteriestatus
+- ⚡ animierte Energieflüsse
+- 🌙 Hell-/Dunkelmodus (wird gespeichert)
+- 🔄 Live-Aktualisierung
 
 ---
 
 ## Voraussetzungen
 
 - Python 3.11 oder neuer
-- Zugriff auf das lokale Netzwerk der SigEnergy-Anlage
-- Aktiviertes Modbus TCP auf der SigEnergy
-- Git (optional)
+- Git
+- Zugriff auf das lokale Netzwerk
+- Aktiviertes Modbus TCP auf der SigEnergy-Anlage
 
 ---
 
 ## Installation
 
-Repository klonen:
+Repository klonen
 
 ```bash
-git clone https://github.com/DEINNAME/OpenEnergyDashboards.git
+git clone https://github.com/aspooner885/OpenEnergyDashboards.git
 cd OpenEnergyDashboards
 ```
 
-Virtuelle Umgebung erstellen.
+Virtuelle Umgebung erstellen
 
 ### Linux
 
@@ -64,7 +63,7 @@ python -m venv openenergy-venv
 openenergy-venv\Scripts\activate
 ```
 
-Benötigte Pakete installieren:
+Pakete installieren
 
 ```bash
 pip install -r requirements.txt
@@ -74,23 +73,23 @@ pip install -r requirements.txt
 
 ## SigEnergyPythonAPI
 
-Dieses Dashboard verwendet die **SigEnergyPythonAPI**.
+Das Dashboard verwendet die SigEnergyPythonAPI.
 
-Repository klonen:
+Installation erfolgt automatisch über die requirements.txt.
+
+Alternativ kann sie manuell installiert werden:
 
 ```bash
-git clone https://github.com/DEINNAME/SigenergyPythonAPI.git
+git clone https://github.com/aspooner885/SigenergyPythonAPI.git
 ```
-
-Alternativ kann eine bereits vorhandene Installation verwendet werden.
 
 ---
 
 ## Konfiguration
 
-Die Verbindung zur Anlage wird über die Datei
+Die Verbindung wird über
 
-```
+```text
 config.py
 ```
 
@@ -112,13 +111,13 @@ cd python
 python server.py
 ```
 
-Alternativ:
+oder
 
 ```bash
 uvicorn server:app --host 0.0.0.0 --port 8000
 ```
 
-Anschließend im Browser öffnen:
+Danach im Browser öffnen
 
 ```
 http://localhost:8000
@@ -132,32 +131,98 @@ http://IP_DES_SERVERS:8000
 
 ---
 
-## Bedeutung der Farben
+## Bedeutung der Energieflüsse
 
-| Farbe | Energiefluss |
-|-------|--------------|
-| 🟠 Orange | PV → Haus |
-| 🟢 Grün | PV → Netz |
-| 🔵 Blau | Netz → Haus |
-| 🔷 Türkis | Batterie → Haus |
-| 🟡 Gelb | PV → Batterie |
+| Farbe | Bedeutung |
+|--------|-----------|
+| 🟠 | PV → Haus |
+| 🟢 | PV → Netz |
+| 🔵 | Netz → Haus |
+| 🔷 | Batterie → Haus |
+| 🟡 | PV → Batterie |
 
 ---
 
-## Fehlerbehebung
+# Home Assistant Dashboard
 
-### Keine Werte sichtbar
+Das Repository enthält zusätzlich ein Dashboard für Home Assistant.
+
+## Voraussetzungen
+
+Installierte HACS-Komponenten:
+
+- Mushroom Cards
+- ApexCharts Card
+- Power Flow Card Plus
+- Card Mod (optional)
+
+---
+
+## Installation
+
+Die Datei
+
+```
+homeassistant/dashboard.yaml
+```
+
+als neues Dashboard in Home Assistant importieren.
+
+Anschließend die verwendeten Sensoren an die eigenen Entity-IDs anpassen.
+
+Benötigt werden mindestens folgende Sensoren:
+
+### Aktuelle Leistungen
+
+- PV-Leistung
+- Hausverbrauch
+- Netzleistung
+- Batterieleistung
+- Batteriestand
+
+### Tageswerte
+
+- PV-Erzeugung
+- Hausverbrauch
+- Netzbezug
+- Netzeinspeisung
+- Akku geladen
+- Akku entladen
+
+### Berechnete Sensoren
+
+Zusätzlich werden folgende Template-Sensoren verwendet:
+
+- Autarkiegrad
+- Eigenverbrauchsquote
+- PV → Haus
+
+Diese können über die entsprechenden Home-Assistant-Templates erstellt werden.
+
+---
+
+## Funktionen
+
+- Live-Energiefluss
+- Tagesstatistiken
+- PV-Leistungsdiagramm
+- Autarkiegrad
+- Eigenverbrauch
+- optimiert für Desktop und Tablet
+
+---
+
+# Fehlerbehebung
+
+## Keine Daten
 
 Prüfen:
 
+- Modbus aktiviert
+- richtige Entity-IDs
 - SigEnergy erreichbar
-- Modbus TCP aktiviert
-- IP-Adresse korrekt
-- Firewall blockiert Port 502 nicht
 
-### Dashboard startet nicht
-
-Prüfen, ob
+## Python Dashboard startet nicht
 
 ```bash
 python server.py
@@ -169,13 +234,11 @@ oder
 uvicorn server:app
 ```
 
-ohne Fehlermeldung startet.
+ohne Fehlermeldung starten.
 
-### Browser zeigt eine alte Version
+## Browser zeigt alte Version
 
-Den Browser-Cache leeren.
-
-Windows / Linux:
+Browsercache leeren
 
 ```
 STRG + F5
@@ -186,14 +249,15 @@ STRG + F5
 # Geplante Inhalte
 
 - weitere Dashboard-Designs
-- zusätzliche Energiefluss-Visualisierungen
-- Desktop-Anwendungen
-- Web-Anwendungen
+- Grafana-Dashboard
+- Mobile Dashboard
 - Wandtablet-Layouts
-- mobile Ansichten
+- weitere Energiefluss-Visualisierungen
 
 ---
 
 # Lizenz
 
-MIT License
+Dieses Projekt steht unter der MIT-Lizenz.
+
+Die verwendete SigEnergyPythonAPI ist ein eigenständiges Projekt und wird ebenfalls unter der MIT-Lizenz veröffentlicht.
